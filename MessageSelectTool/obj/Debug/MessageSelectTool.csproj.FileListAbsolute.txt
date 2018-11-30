@@ -1,0 +1,9 @@
+C:\Users\Rina\source\repos\MessageSelectTool\MessageSelectTool\bin\Debug\MessageSelectTool.exe.config
+C:\Users\Rina\source\repos\MessageSelectTool\MessageSelectTool\bin\Debug\MessageSelectTool.exe
+C:\Users\Rina\source\repos\MessageSelectTool\MessageSelectTool\bin\Debug\MessageSelectTool.pdb
+C:\Users\Rina\source\repos\MessageSelectTool\MessageSelectTool\obj\Debug\MessageSelectTool.Form1.resources
+C:\Users\Rina\source\repos\MessageSelectTool\MessageSelectTool\obj\Debug\MessageSelectTool.Properties.Resources.resources
+C:\Users\Rina\source\repos\MessageSelectTool\MessageSelectTool\obj\Debug\MessageSelectTool.csproj.GenerateResource.cache
+C:\Users\Rina\source\repos\MessageSelectTool\MessageSelectTool\obj\Debug\MessageSelectTool.csproj.CoreCompileInputs.cache
+C:\Users\Rina\source\repos\MessageSelectTool\MessageSelectTool\obj\Debug\MessageSelectTool.exe
+C:\Users\Rina\source\repos\MessageSelectTool\MessageSelectTool\obj\Debug\MessageSelectTool.pdb
