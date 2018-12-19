@@ -59,7 +59,11 @@ namespace MessageSelectTool
                 string destFileName = filePath + newPath + "\\" + subPath + "\\" + rsubPath;
                 try
                 {
-                    File.Move(item, destFileName + "\\" + filename); // 移动报文到对应的文件夹下
+                    //File.Move(item, destFileName + "\\" + filename); // 移动报文到对应的文件夹下
+                    //直接移动遇到已存在文件容易挂掉
+                    //改为先复制，再删除的方式移动文件
+                    File.Copy(item, destFileName + "\\" + filename,true);
+                    File.Delete(item);
                 }
                 catch (Exception ex)
                 {
