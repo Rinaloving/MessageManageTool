@@ -7,3 +7,13 @@ C:\Users\Rina\source\repos\MessageSelectTool\MessageSelectTool\obj\Debug\Message
 C:\Users\Rina\source\repos\MessageSelectTool\MessageSelectTool\obj\Debug\MessageSelectTool.csproj.CoreCompileInputs.cache
 C:\Users\Rina\source\repos\MessageSelectTool\MessageSelectTool\obj\Debug\MessageSelectTool.exe
 C:\Users\Rina\source\repos\MessageSelectTool\MessageSelectTool\obj\Debug\MessageSelectTool.pdb
+D:\GitHub\MessageManageTool\MessageSelectTool\bin\Debug\MessageSelectTool.exe.config
+D:\GitHub\MessageManageTool\MessageSelectTool\bin\Debug\MessageSelectTool.exe
+D:\GitHub\MessageManageTool\MessageSelectTool\bin\Debug\MessageSelectTool.pdb
+D:\GitHub\MessageManageTool\MessageSelectTool\obj\Debug\MessageSelectTool.csprojAssemblyReference.cache
+D:\GitHub\MessageManageTool\MessageSelectTool\obj\Debug\MessageSelectTool.Form1.resources
+D:\GitHub\MessageManageTool\MessageSelectTool\obj\Debug\MessageSelectTool.Properties.Resources.resources
+D:\GitHub\MessageManageTool\MessageSelectTool\obj\Debug\MessageSelectTool.csproj.GenerateResource.cache
+D:\GitHub\MessageManageTool\MessageSelectTool\obj\Debug\MessageSelectTool.csproj.CoreCompileInputs.cache
+D:\GitHub\MessageManageTool\MessageSelectTool\obj\Debug\MessageSelectTool.exe
+D:\GitHub\MessageManageTool\MessageSelectTool\obj\Debug\MessageSelectTool.pdb
