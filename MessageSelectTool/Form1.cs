@@ -38,7 +38,11 @@ namespace MessageSelectTool
             }
 
         }
-
+        /// <summary>
+        /// 帅选   modify by cfl 2018年12月24日
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
             //获取文件夹下所有xml结尾的文件
