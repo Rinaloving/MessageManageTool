@@ -45,7 +45,7 @@ namespace ModifyMessageTool.DBUtility
                     connection.Open();
                     OracleDataAdapter command = new OracleDataAdapter(SQLString, connection);
                     Type type = t.GetType();
-                    command.Update(ds, type.Name);
+                    command.Fill(ds, type.Name);
                 }
                 catch (OracleException ex)
                 {

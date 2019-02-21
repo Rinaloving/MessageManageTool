@@ -292,7 +292,7 @@ namespace ModifyMessageTool
            
 
             //TABLEMANAGE ta = tBll.QueryByTableName("bw3716_2019");
-            //bool b = tBll.UpdateByTableName("bw3716_2019", "2858");
+            bool b = tBll.UpdateByTableName("Rina", "2858");
             //获取所有字段 
             //FieldInfo[] fields = typeof(TABLEMANAGE).GetFields(BindingFlags.NonPublic | BindingFlags.Instance); //获取私有字段
 
@@ -315,7 +315,7 @@ namespace ModifyMessageTool
 
             TABLEMANAGE t = new TABLEMANAGE("Rina",111,"测试");
 
-            bool b = tBll.Insert(t);
+            bool b1 = tBll.Insert(t);
 
             
 

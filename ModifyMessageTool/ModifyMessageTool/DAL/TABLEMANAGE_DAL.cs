@@ -68,12 +68,25 @@ namespace ModifyMessageTool.DAL
 
         Func<string, string> SelectSql = (x) => @"select * from " + x;
 
-
+        /// <summary>
+        /// 插入方法
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="t"></param>
+        /// <returns></returns>
         public bool Insert<T>(T t) where T : class
+        {
+            string sql = GetInsertSql(t);
+            return OracleHelper.Insert(sql, t);
+        }
+
+
+        public String GetInsertSql<T>(T t)
         {
             //通过反射获取表的所有字段
             // FieldInfo[] fields = typeof(T).GetFields(BindingFlags.NonPublic | BindingFlags.Instance); //获取私有字段
             // StringBuilder sb = new StringBuilder();
+
             string jsonstr = DataContractJsonSerialize<T>(t);
             JObject obj = JObject.Parse(jsonstr);
             StringBuilder sk = new StringBuilder();
@@ -100,9 +113,10 @@ namespace ModifyMessageTool.DAL
 
                 num--;
             }
-            string sql = @"INSERT INTO TABLEMANAGE("+ fieldnames + ") VALUES("+ fieldvalues +")";
-            return OracleHelper.Insert(sql, t);
+            return InsertSql(fieldnames, fieldvalues);
         }
+
+        Func<string, string, string> InsertSql = (x, y) => @"INSERT INTO TABLEMANAGE(" + x + ") VALUES(" + y + ")";
 
         // <summary>
 
