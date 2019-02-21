@@ -35,17 +35,17 @@ namespace ModifyMessageTool.DAL
         public TABLEMANAGE QueryByTableName(string tablename)
         {
             TABLEMANAGE t = new TABLEMANAGE();
-            string sql = @"SELECT * FROM TABLEMANAGE WHERE TABLENAME = '"+tablename+"'";
+            string sql = @"SELECT * FROM TABLEMANAGE WHERE TABLENAME = '" + tablename + "'";
             TABLEMANAGE tABLEMANAGE = OracleHelper.Select<TABLEMANAGE>(sql, t);
 
             return tABLEMANAGE;
         }
 
-        public bool UpdateByTableName(string tablename,string id)
+        public bool UpdateByTableName(string tablename, string id)
         {
             TABLEMANAGE t = new TABLEMANAGE();
-            string sql = @"UPDATE TABLEMANAGE SET TABLECURENTID = '"+id+"'  WHERE TABLENAME = '" + tablename + "'";
-            return OracleHelper.Update<TABLEMANAGE>(sql,t);
+            string sql = @"UPDATE TABLEMANAGE SET TABLECURENTID = '" + id + "'  WHERE TABLENAME = '" + tablename + "'";
+            return OracleHelper.Update<TABLEMANAGE>(sql, t);
 
         }
 
@@ -57,7 +57,7 @@ namespace ModifyMessageTool.DAL
         /// <returns></returns>
         public List<T> Select<T>(T t) where T : class
         {
-            
+
             Type type = t.GetType();
             string sql = SelectSql(type.Name);
             List<T> list = OracleHelper.Query<T>(sql, t).ToList();
@@ -80,6 +80,32 @@ namespace ModifyMessageTool.DAL
             return OracleHelper.Insert(sql, t);
         }
 
+        Func<StringBuilder, StringBuilder, JObject, string> MakeInsertSql = (x, y, obj) => 
+        {
+            int num = obj.Count;
+            string fieldnames = "";
+            string fieldvalues = "";
+            foreach (var item in obj)
+            {
+                if (num == 1)
+                {
+                    fieldnames = x.Append(item.Key).ToString();
+                    fieldvalues = y.Append("'").Append(item.Value).Append("'").ToString();
+                }
+                else if (num == 0)
+                {
+                    //不用操作，我们已经得到所要的结果了
+                }
+                else
+                {
+                    fieldnames = x.Append(item.Key).Append(",").ToString();
+                    fieldvalues = y.Append("'").Append(item.Value).Append("'").Append(",").ToString();
+                }
+
+                num--;
+            }
+            return InsertSql(fieldnames, fieldvalues);
+        };
 
         public String GetInsertSql<T>(T t)
         {
@@ -91,32 +117,11 @@ namespace ModifyMessageTool.DAL
             JObject obj = JObject.Parse(jsonstr);
             StringBuilder sk = new StringBuilder();
             StringBuilder sv = new StringBuilder();
-            string fieldnames = "";
-            string fieldvalues = "";
-            int num = obj.Count;
-            foreach (var x in obj)
-            {
-                if (num == 1)
-                {
-                    fieldnames = sk.Append(x.Key).ToString();
-                    fieldvalues = sv.Append("'").Append(x.Value).Append("'").ToString();
-                }
-                else if (num == 0)
-                {
-                    //不用操作，我们已经得到所要的结果了
-                }
-                else
-                {
-                    fieldnames = sk.Append(x.Key).Append(",").ToString();
-                    fieldvalues = sv.Append("'").Append(x.Value).Append("'").Append(",").ToString();
-                }
 
-                num--;
-            }
-            return InsertSql(fieldnames, fieldvalues);
+            return MakeInsertSql(sk,sv,obj);
         }
 
-        Func<string, string, string> InsertSql = (x, y) => @"INSERT INTO TABLEMANAGE(" + x + ") VALUES(" + y + ")";
+        static Func<string, string, string> InsertSql = (x, y) => @"INSERT INTO TABLEMANAGE(" + x + ") VALUES(" + y + ")";
 
         // <summary>
 
