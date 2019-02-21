@@ -49,6 +49,26 @@ namespace ModifyMessageTool.DAL
 
         }
 
+        /// <summary>
+        /// 查询方法
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public List<T> Select<T>(T t) where T : class
+        {
+            
+            Type type = t.GetType();
+            string sql = SelectSql(type.Name);
+            List<T> list = OracleHelper.Query<T>(sql, t).ToList();
+
+            return list;
+        }
+
+
+        Func<string, string> SelectSql = (x) => @"select * from " + x;
+
+
         public bool Insert<T>(T t) where T : class
         {
             //通过反射获取表的所有字段

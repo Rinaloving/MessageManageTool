@@ -289,10 +289,7 @@ namespace ModifyMessageTool
         public static void testOracleDate()
         {
             TABLEMANAGE_BLL tBll = new TABLEMANAGE_BLL();
-            //List<TABLEMANAGE> list = tBll.Query();
-            //list.ForEach(p=>{
-            //    Console.WriteLine(p.TABLENAME + " " + p.TABLEMANAGEDDSC + " " + p.TABLECURENTID);
-            //});
+           
 
             //TABLEMANAGE ta = tBll.QueryByTableName("bw3716_2019");
             //bool b = tBll.UpdateByTableName("bw3716_2019", "2858");
@@ -303,7 +300,12 @@ namespace ModifyMessageTool
             //方法插入数据库
             //1.创建有参构造方法
             //2.调用Insert方法
-            
+
+            List<TABLEMANAGE> list = tBll.Select(tab);
+            list.ForEach(p =>
+            {
+                Console.WriteLine(p.TABLENAME + " " + p.TABLEMANAGEDDSC + " " + p.TABLECURENTID);
+            });
 
             //foreach (var item in fields)
             //{
@@ -314,6 +316,8 @@ namespace ModifyMessageTool
             TABLEMANAGE t = new TABLEMANAGE("Rina",111,"测试");
 
             bool b = tBll.Insert(t);
+
+            
 
             Console.WriteLine(b);
             //Console.WriteLine(ta.TABLECURENTID);

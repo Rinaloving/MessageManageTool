@@ -41,5 +41,10 @@ namespace ModifyMessageTool.BLL
             return tDal.Insert<T>(t);
         }
 
+        public List<T> Select<T>( T t) where T:class
+        {
+            return tDal.Select<T>(t);
+        }
+
     }
 }

@@ -62,6 +62,14 @@ namespace ModifyMessageTool.DBUtility
             }
         }
 
+        /// <summary>
+        /// 执行更新
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="connectionString"></param>
+        /// <param name="SQLString"></param>
+        /// <param name="t"></param>
+        /// <returns></returns>
         public static bool Update<T>(string connectionString, string SQLString, T t)
         {
             using (OracleConnection connection = new OracleConnection(connectionString))
