@@ -69,8 +69,13 @@ namespace ModifyMessageTool.DAL
         Func<string, string> SelectSql = (x) => @"select * from " + x;
 
 
+        public bool Delete<T>(T t)where T : class
+        {
+            string sql = GetInsertSql(t);
+            return OracleHelper.Delete(sql, t);
+        }
 
-
+        Func<string, string> DeleteSql = (x) => @"DELETE FROM TABLEMANAGE  WHERE TABLENAME = '"+ x +"'";
 
         /// <summary>
         /// 插入方法
@@ -84,7 +89,7 @@ namespace ModifyMessageTool.DAL
             return OracleHelper.Insert(sql, t);
         }
 
-        Func<StringBuilder, StringBuilder, JObject, string> MakeInsertSql = (x, y, obj) => 
+        Func<StringBuilder, StringBuilder, JObject string,string> MakeInsertSql = (x, y, obj ,t ) => 
         {
             int num = obj.Count;
             string fieldnames = "";
@@ -108,7 +113,7 @@ namespace ModifyMessageTool.DAL
 
                 num--;
             }
-            return InsertSql(fieldnames, fieldvalues);
+            return InsertSql(t,fieldnames, fieldvalues);
         };
 
         public String GetInsertSql<T>(T t)
@@ -121,11 +126,11 @@ namespace ModifyMessageTool.DAL
             JObject obj = JObject.Parse(jsonstr);
             StringBuilder sk = new StringBuilder();
             StringBuilder sv = new StringBuilder();
-
-            return MakeInsertSql(sk,sv,obj);
+            Type type = t.GetType();
+            return MakeInsertSql(sk,sv,obj,type.Name);
         }
 
-        static Func<string, string, string> InsertSql = (x, y) => @"INSERT INTO TABLEMANAGE(" + x + ") VALUES(" + y + ")";
+        static Func<string, string, string,string> InsertSql = (t, x, y) => @"INSERT INTO "+ t +"(" + x + ") VALUES(" + y + ")";
 
         // <summary>
 

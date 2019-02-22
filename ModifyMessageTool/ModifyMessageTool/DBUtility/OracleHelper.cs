@@ -81,13 +81,13 @@ namespace ModifyMessageTool.DBUtility
                     OracleDataAdapter command = new OracleDataAdapter(SQLString, connection);
                     Type type = t.GetType();
                     command.Fill(ds, type.Name);
-                    
+
                 }
                 catch (OracleException ex)
                 {
                     return false;
                     throw new Exception(ex.Message);
-                   
+
                 }
                 finally
                 {
@@ -101,7 +101,37 @@ namespace ModifyMessageTool.DBUtility
         }
 
 
-        public static bool Insert<T>(string connectionString, string SQLString, T t) where T: class
+        public static bool Insert<T>(string connectionString, string SQLString, T t) where T : class
+        {
+            using (OracleConnection connection = new OracleConnection(connectionString))
+            {
+                DataSet ds = new DataSet();
+                try
+                {
+                    connection.Open();
+                    OracleDataAdapter command = new OracleDataAdapter(SQLString, connection);
+                    Type type = t.GetType();
+                    command.Fill(ds, type.Name);
+
+                }
+                catch (OracleException ex)
+                {
+                    return false;
+                    throw new Exception(ex.Message);
+
+                }
+                finally
+                {
+                    if (connection.State != ConnectionState.Closed)
+                    {
+                        connection.Close();
+                    }
+                }
+                return true;
+            }
+        }
+
+        public static bool Delete<T>(string connectionString, string SQLString, T t) where T : class
         {
             using (OracleConnection connection = new OracleConnection(connectionString))
             {
@@ -179,7 +209,13 @@ namespace ModifyMessageTool.DBUtility
             return OracleHelper.Update<T>(OracleHelper.oracleconnectionstring, sql, t);
 
         }
-
+        /// <summary>
+        /// 插入操作
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sql"></param>
+        /// <param name="t"></param>
+        /// <returns></returns>
         public static bool Insert<T>(string sql, T t) where T : class
         {
 
@@ -187,7 +223,10 @@ namespace ModifyMessageTool.DBUtility
 
         }
 
-
+        public static bool Delete<T>(string sql,T t) where T: class
+        {
+            return OracleHelper.Delete<T>(OracleHelper.oracleconnectionstring, sql, t);
+        }
 
 
 
