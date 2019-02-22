@@ -46,5 +46,9 @@ namespace ModifyMessageTool.BLL
             return tDal.Select<T>(t);
         }
 
+        public bool Delete<T>(T t,string condition) where  T : class
+        {
+            return tDal.Delete<T>(t,condition);
+        }
     }
 }

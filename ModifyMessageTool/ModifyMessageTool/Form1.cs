@@ -290,6 +290,10 @@ namespace ModifyMessageTool
         {
             TABLEMANAGE_BLL tBll = new TABLEMANAGE_BLL();
 
+            TABLEMANAGE tab = new TABLEMANAGE();
+
+            tBll.Delete<TABLEMANAGE>(tab,"where TABLENAME ='Rina'");
+
 
             TABLEMANAGE t = new TABLEMANAGE("Rina", 111, "测试");
 
@@ -300,7 +304,7 @@ namespace ModifyMessageTool
             //获取所有字段 
             //FieldInfo[] fields = typeof(TABLEMANAGE).GetFields(BindingFlags.NonPublic | BindingFlags.Instance); //获取私有字段
 
-            TABLEMANAGE tab = new TABLEMANAGE();
+          
             //方法插入数据库
             //1.创建有参构造方法
             //2.调用Insert方法

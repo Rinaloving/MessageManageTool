@@ -69,13 +69,14 @@ namespace ModifyMessageTool.DAL
         Func<string, string> SelectSql = (x) => @"select * from " + x;
 
 
-        public bool Delete<T>(T t)where T : class
+        public bool Delete<T>(T t,string condition) where T : class
         {
-            string sql = GetInsertSql(t);
+            Type type = t.GetType();
+            string sql = DeleteSql(type.Name,condition);
             return OracleHelper.Delete(sql, t);
         }
 
-        Func<string, string> DeleteSql = (x) => @"DELETE FROM TABLEMANAGE  WHERE TABLENAME = '"+ x +"'";
+        Func<string, string, string> DeleteSql = (x, y) => @"DELETE FROM " + x + "  WHERE " + y + "";
 
         /// <summary>
         /// 插入方法
@@ -89,7 +90,7 @@ namespace ModifyMessageTool.DAL
             return OracleHelper.Insert(sql, t);
         }
 
-        Func<StringBuilder, StringBuilder, JObject string,string> MakeInsertSql = (x, y, obj ,t ) => 
+        Func<StringBuilder, StringBuilder, JObject,string, string> MakeInsertSql = (x, y, obj ,t ) => 
         {
             int num = obj.Count;
             string fieldnames = "";
