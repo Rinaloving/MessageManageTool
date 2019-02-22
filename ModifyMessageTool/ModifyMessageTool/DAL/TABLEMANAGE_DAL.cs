@@ -68,6 +68,10 @@ namespace ModifyMessageTool.DAL
 
         Func<string, string> SelectSql = (x) => @"select * from " + x;
 
+
+
+
+
         /// <summary>
         /// 插入方法
         /// </summary>

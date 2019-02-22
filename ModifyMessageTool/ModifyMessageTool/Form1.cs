@@ -334,59 +334,78 @@ namespace ModifyMessageTool
     /// </summary>
     /// <returns></returns>
     public static string GetAndUpadateMaxXmlFileNameNum()
+    {
+
+        TABLEMANAGE_BLL tBll = new TABLEMANAGE_BLL();
+        TABLEMANAGE tab = tBll.QueryByTableName("PROCNUM_2019");
+
+        string newnum = Convert.ToString(1000000 + Convert.ToInt32(tab.TABLECURENTID)).Substring(1, 6);
+
+        tBll.UpdateByTableName("PROCNUM_2019",(Convert.ToInt32(tab.TABLECURENTID) + 1).ToString());
+
+        return newnum;
+
+        #region 废弃
+        /*
+
+        //获取Configuration对象
+        Configuration config = System.Configuration.ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+        string strCon = config.AppSettings.Settings["pfuserconnectionstring"].Value;
+        //string strCon = @"Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=127.0.0.1)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=orcl)));Persist Security Info=True;User ID=pfuser;Password=123;";
+        //定义连接
+        OracleConnection MyCon = new OracleConnection(strCon);
+        try
         {
-            //获取Configuration对象
-            Configuration config = System.Configuration.ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            string strCon = config.AppSettings.Settings["pfuserconnectionstring"].Value;
-            //string strCon = @"Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=127.0.0.1)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=orcl)));Persist Security Info=True;User ID=pfuser;Password=123;";
-            //定义连接
-            OracleConnection MyCon = new OracleConnection(strCon);
-            try
-            {
 
-                // 打开连接  
-                MyCon.Open();
-                string strSQL = @"SELECT * FROM TABLEMANAGE WHERE TABLENAME = 'bw3716_2019'"; // bw3716_2019 BW3716_2019
-                OracleDataAdapter MyDataAdapter = new OracleDataAdapter();
-                MyDataAdapter.SelectCommand = new OracleCommand(strSQL, MyCon);
-                // 将数据填充到DataSet中
-                DataSet MyDataSet = new DataSet();
+            // 打开连接  
+            MyCon.Open();
+            string strSQL = @"SELECT * FROM TABLEMANAGE WHERE TABLENAME = 'bw3716_2019'"; // bw3716_2019 BW3716_2019
+            OracleDataAdapter MyDataAdapter = new OracleDataAdapter();
+            MyDataAdapter.SelectCommand = new OracleCommand(strSQL, MyCon);
+            // 将数据填充到DataSet中
+            DataSet MyDataSet = new DataSet();
 
-                MyDataAdapter.Fill(MyDataSet, "TABLEMANAGE");
-                // 从DataSet中获取DataTable 
+            MyDataAdapter.Fill(MyDataSet, "TABLEMANAGE");
+            // 从DataSet中获取DataTable 
 
-                DataTable MyDataTable = MyDataSet.Tables["TABLEMANAGE"];
+            DataTable MyDataTable = MyDataSet.Tables["TABLEMANAGE"];
 
-                //第一步：获取数据库pfuser中的tablemanage表中的bw3716_2019字段获取报文后六位顺序号
-                string num = MyDataTable.Rows[0]["TABLECURENTID"].ToString();
+            //第一步：获取数据库pfuser中的tablemanage表中的bw3716_2019字段获取报文后六位顺序号
+            string num = MyDataTable.Rows[0]["TABLECURENTID"].ToString();
 
-                string newnum = Convert.ToString(1000000 + Convert.ToInt32(num)).Substring(1, 6);
+            TABLEMANAGE_BLL tBll = new TABLEMANAGE_BLL();
+            TABLEMANAGE tab = tBll.QueryByTableName("PROCNUM_2019");
+
+            string newnum = Convert.ToString(1000000 + Convert.ToInt32(num)).Substring(1, 6);
 
 
-                //第五步：更新数据库pfuser中的tablemanage表中的bw3716_2019字段的值（+1）
+            //第五步：更新数据库pfuser中的tablemanage表中的bw3716_2019字段的值（+1）
 
-                MyDataTable.Rows[0]["TABLECURENTID"] = Convert.ToInt32(num) + 1;
-
-
-                // 将DataSet中的数据更新到数据库中 
-
-                OracleCommandBuilder MyCommandBuilder = new OracleCommandBuilder(MyDataAdapter);
-
-                MyDataAdapter.Update(MyDataSet, "TABLEMANAGE");
+            MyDataTable.Rows[0]["TABLECURENTID"] = Convert.ToInt32(num) + 1;
 
 
-                return newnum;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("{0}", ex.ToString());
-                throw ex;
-            }
-            finally
-            {
-                MyCon.Close();
-            }
+            // 将DataSet中的数据更新到数据库中 
+
+            OracleCommandBuilder MyCommandBuilder = new OracleCommandBuilder(MyDataAdapter);
+
+            MyDataAdapter.Update(MyDataSet, "TABLEMANAGE");
+
+
+            return newnum;
         }
+        catch (Exception ex)
+        {
+            Console.WriteLine("{0}", ex.ToString());
+            throw ex;
+        }
+        finally
+        {
+            MyCon.Close();
+        }
+        */
+        #endregion
+
+    }
 
         /// <summary>
         /// 修改报文内容
