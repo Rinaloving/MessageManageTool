@@ -136,6 +136,7 @@ namespace ModifyMessageTool.DBUtility
             using (OracleConnection connection = new OracleConnection(connectionString))
             {
                 DataSet ds = new DataSet();
+
                 try
                 {
                     connection.Open();

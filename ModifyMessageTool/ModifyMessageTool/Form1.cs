@@ -292,12 +292,14 @@ namespace ModifyMessageTool
 
             TABLEMANAGE tab = new TABLEMANAGE();
 
-            tBll.Delete<TABLEMANAGE>(tab,"where TABLENAME ='Rina'");
+
+            //TABLEMANAGE t = new TABLEMANAGE("Rina", 111, "测试");
+
+            //bool b1 = tBll.Insert(t);
+
+            tBll.Delete<TABLEMANAGE>(tab,"TABLENAME ='Rina'");
 
 
-            TABLEMANAGE t = new TABLEMANAGE("Rina", 111, "测试");
-
-            bool b1 = tBll.Insert(t);
 
             //TABLEMANAGE ta = tBll.QueryByTableName("bw3716_2019");
             bool b = tBll.UpdateByTableName("Rina", "2858");
@@ -330,14 +332,12 @@ namespace ModifyMessageTool
 
         }
 
-        
 
-
-    /// <summary>
-    /// 获取数据库中报文序列最大数，使用完并更新最大数+1
-    /// </summary>
-    /// <returns></returns>
-    public static string GetAndUpadateMaxXmlFileNameNum()
+        /// <summary>
+        /// 获取数据库中报文序列最大数，使用完并更新最大数+1
+        /// </summary>
+        /// <returns></returns>
+        public static string GetAndUpadateMaxXmlFileNameNum()
     {
 
         TABLEMANAGE_BLL tBll = new TABLEMANAGE_BLL();

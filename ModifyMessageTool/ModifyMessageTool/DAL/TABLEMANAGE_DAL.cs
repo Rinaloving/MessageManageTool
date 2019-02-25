@@ -71,8 +71,12 @@ namespace ModifyMessageTool.DAL
 
         public bool Delete<T>(T t,string condition) where T : class
         {
+            //通过反射获取表的所有字段
+            FieldInfo[] fields = typeof(T).GetFields(BindingFlags.NonPublic | BindingFlags.Instance); //获取私有字段
+            string str = fields[0].Name; // <TABLENAME>k__BackingField 
             Type type = t.GetType();
             string sql = DeleteSql(type.Name,condition);
+
             return OracleHelper.Delete(sql, t);
         }
 
@@ -119,10 +123,7 @@ namespace ModifyMessageTool.DAL
 
         public String GetInsertSql<T>(T t)
         {
-            //通过反射获取表的所有字段
-            // FieldInfo[] fields = typeof(T).GetFields(BindingFlags.NonPublic | BindingFlags.Instance); //获取私有字段
-            // StringBuilder sb = new StringBuilder();
-
+            
             string jsonstr = DataContractJsonSerialize<T>(t);
             JObject obj = JObject.Parse(jsonstr);
             StringBuilder sk = new StringBuilder();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Excel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -10,7 +11,7 @@ namespace ModifyMessageTool.Model
     /// <summary>
     /// 实体类
     /// </summary>
-
+    [Serializable]
     [DataContract]
     public class TABLEMANAGE
     {
